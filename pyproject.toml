@@ -1,0 +1,17 @@
+[project]
+name = "helper"
+version = "0.1.0"
+description = "Helpers for you."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "alembic>=1.14.0",
+    "asyncpg>=0.30.0",
+    "pydantic>=2.10.3",
+    "sanic>=24.6.0",
+    "sqlalchemy>=2.0.36",
+]
+
+[tool.uv.dependencies.dev]
+pytest = "*"
+testcontainers = "*"
