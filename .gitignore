@@ -10,7 +10,7 @@ ENV/
 venv/
 
 # IDE/editor specific files
-.vscode/
+*.vscode/
 .idea/
 *.swp
 *.swo
