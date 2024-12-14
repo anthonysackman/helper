@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sanic_app
+    ports:
+      - "${APP_PORT:-8000}:8000"  # Default to 8000 if APP_PORT is not set
+    environment:
+      DATABASE_URL: "${DATABASE_URL:-postgresql+asyncpg://user:password@db:5432/helper}"  # PostgreSQL connection
+      REDIS_URL: "${REDIS_URL:-redis://redis:6379/0}"  # Redis connection
+      ENV: "${ENV:-development}"  # Default to development
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app  # Mount the app directory for development
+      - /app/.venv
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-user}"  # Default to user
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-password}"  # Default to password
+      POSTGRES_DB: "${POSTGRES_DB:-helper}"  # Default to helper
+    ports:
+      - "${DB_PORT:-5432}:5432"  # Default to 5432 if DB_PORT is not set
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis_cache
+    restart: always
+    ports:
+      - "${REDIS_PORT:-6379}:6379"  # Default to Redis' default port
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,9 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.ruffEnabled": true,
+    "python.linting.ruffPath": "ruff",  // Use the ruff binary in your PATH or venv
+    "python.linting.ruffArgs": ["--fix"], // Optional: Auto-fix issues where possible
+    "editor.codeActionsOnSave": {
+        "source.fixAll.ruff": "explicit" // Auto-fix issues on save
+    }
+}
