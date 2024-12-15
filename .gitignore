@@ -16,6 +16,7 @@ venv/
 *.swo
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 
 # Python egg files
 *.egg
